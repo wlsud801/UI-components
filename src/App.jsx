@@ -2,7 +2,7 @@ import GlobalStyle from './GlobalStyle';
 import './App.css';
 import CmnBtn from './components/Button';
 import CmnInput from './components/Input';
-// import Modal from './components/Modal';
+import Modal from './components/Modal';
 import CmnSelect from './components/Select';
 import Wrapper from './layout/Wrapper';
 import { useState } from 'react';
@@ -35,10 +35,7 @@ function App() {
   }
 
   // Modal controller
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // const openModal = () => setIsModalOpen(true);
-  // const closeModal = () => setIs  
+  const [show, setShow] = useState(false);
 
   const select = (e) =>{
     let option = e.target;
@@ -70,10 +67,14 @@ function App() {
             <CmnBtn type='submit' onClick={SubmitHandler}>저장</CmnBtn>
         </form>
         <h1>Modal</h1>
-        <CmnBtn onClick={()=>{}} size="Small">open modal</CmnBtn>
-        {/* <Modal style="btnType" isOpen={false}></Modal> */}
-        <CmnBtn onClick={()=>{}} type="negative">open modal</CmnBtn>
-        {/* <Modal style="backType" isOpen={false}></Modal> */}
+        {/* 배경 눌러도 닫히는 모달 */}
+        <CmnBtn onClick={()=>{setShow((s) => !s)}} size="Small">open modal</CmnBtn>
+        <Modal show={show} closeModal={()=> setShow(false)} type="background" />
+
+        {/* 버튼으로만 조작하는 모달 */}
+        <CmnBtn onClick={()=>{setShow((s) => !s)}} type="negative">open modal</CmnBtn>
+        <Modal show={show} closeModal={()=> setShow(false)} type="button" />
+
         <div className='subject'>
           <h1>Select</h1>
           <form>
