@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 
 const Cmnbtn = styled.button`
   /* 공통 스타일 */
+  /* display: ${(props) => props.isShow? "inline-block" : "none"}; */
   font-size: 1rem;
   padding: 16px 30px;
   margin-right:10px;
@@ -19,12 +20,13 @@ const Cmnbtn = styled.button`
   color:${(props) => props.negative? "white" : '#333'};
 
   ${props => 
-    props.alerted &&
+    props.type === 'negative' ?
     css`
       background-color:${(props) => props.border? '#dfe2e7' : 'rgb(243,96,144)'};
-      border:${(props) => props.border? '4px solidrgb(243,96,144)': 'none'};
-      color:${(props) => props.border?'rgb(243,96,144)':'#fff'}
+      border:${(props) => props.border? '4px solid rgb(243,96,144)': 'none'};
+      color:${(props) => props.border?'rgb(243,96,144)':'#fff'};
     `
+    : ''
   }
 
   &>label{
@@ -33,24 +35,65 @@ const Cmnbtn = styled.button`
   }
 
   ${props => 
-    props.size === 'Medium' &&
+    props.size === 'Medium'?
     css`
       padding:12px 20px;
     `
+    :''
   }
+  
   ${props => 
-    props.size === 'Small' &&
+    props.size === 'Small' ?
     css`
       padding:10px 20px;
     `
+    :''
   }
   
-`
+`;
 
-function CmnBtn({children, ...rest}) {
+const iconicOption = (iconOption, size, type) => {
+    if (iconOption) {
+        if (size === undefined && type === "negative") {
+            return "💡";
+        } else if (size === undefined) {
+            return "👉";
+        } else {
+            return "";
+        }
+    } else {
+        return "";
+    }
+};
+
+// Cmnbtn.defaultProps = {
+//   // icon 기본값을 false 설정
+//   iconOption: true,
+// }
+
+
+ // const additionalIcon = size === "large" ? color === "red"? iconOption ? "💡" : "" : "👉" : "";
+function CmnBtn({children, iconOption = true, ...rest}) {
+  const {size, type} = rest;
+  console.log(size, type)
+  // const size = rest.size ?  rest.size : ""
+  // const type = rest.type ?  rest.type : ""
+  // console.log(size)
+  // console.log(type)
+  // 문제가 undefined일 때 발생?
+  // console.log()
+
   return (
-    <Cmnbtn {...rest}>{children}</Cmnbtn>
+    <Cmnbtn {...rest}>
+      {children + iconicOption(iconOption, size, type)}
+    </Cmnbtn>
   )
 }
+
+
+
+
+
+
 
 export default CmnBtn;

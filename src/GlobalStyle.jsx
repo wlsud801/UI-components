@@ -18,6 +18,9 @@ const GlobalStyle = createGlobalStyle`
         margin-bottom:30px;
         padding:0;
     }
+    ul{
+        list-style:none;
+    }
     button{
         font-family: 'Montserrat','Noto Sans KR', sans-serif;
         font-weight:500;
