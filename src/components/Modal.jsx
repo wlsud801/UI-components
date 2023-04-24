@@ -122,9 +122,9 @@ function modal({contents, onConfirm, onClose, firstModal, secondModal}) {
       <div onClick={outerCloseDoor} className='overlay'></div>
       <Modal>
         <p>{contents.value}</p>
-        <CmnBtn onClick={()=>onClose(contents.name)}>닫기</CmnBtn>
+        <CmnBtn onClick={()=>onClose(contents.name)} iconOption={false}>닫기</CmnBtn>
         {
-          contents.name === "second_modal"? null : <CmnBtn onClick={()=>onConfirm(contents.name)}>확인</CmnBtn>
+          contents.name === "second_modal"? null : <CmnBtn onClick={()=>onConfirm(contents.name)} iconOption={false}>확인</CmnBtn>
         }
       </Modal>
     </ModalWrap>
